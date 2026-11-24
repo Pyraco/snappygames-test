@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#242634">
+<title>Beamfold: a daily light puzzle</title>
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<script>
+  // Pick the theme before first paint so the page never flashes the wrong one.
+  (function () {
+    var t = null;
+    try { t = (JSON.parse(localStorage.getItem('beamfold.simple.v3') || '{}')).theme; } catch (e) { /* private mode */ }
+    if (t !== 'light' && t !== 'dark') t = 'dark'; // dark unless the player has chosen light with the appearance button
+    document.documentElement.dataset.theme = t;
+  })();
+</script>
+  <script type="module" crossorigin src="./assets/index-CKTuAIcM.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-Sxe4ZydO.css">
+  <meta name="description" content="One new light-bending puzzle every day. Turn the mirrors and send the light through every crystal in as few moves as you can. Free, no ads, no sign-up.">
+  <link rel="canonical" href="https://pyraco.github.io/snappygames-test/beamfold/">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="apple-touch-icon" href="./apple-touch-icon.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Beamfold">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Beamfold">
+  <meta property="og:title" content="Beamfold: a daily light puzzle">
+  <meta property="og:description" content="One new light-bending puzzle every day. Turn the mirrors and send the light through every crystal in as few moves as you can. Free, no ads, no sign-up.">
+  <meta property="og:url" content="https://pyraco.github.io/snappygames-test/beamfold/">
+  <meta property="og:image" content="https://pyraco.github.io/snappygames-test/beamfold/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Beamfold: a daily light puzzle">
+  <meta name="twitter:description" content="One new light-bending puzzle every day. Turn the mirrors and send the light through every crystal in as few moves as you can. Free, no ads, no sign-up.">
+  <meta name="twitter:image" content="https://pyraco.github.io/snappygames-test/beamfold/og-image.png">
+  <meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+  <noscript><p style="font:18px system-ui;text-align:center;padding:40px 20px">Beamfold is a puzzle game and needs JavaScript turned on to play.</p></noscript>
+
+<div id="desk">
+  <!-- Behind the window on a big screen: a giant, dim Beamfold board, with the logo's beam bending round the window. -->
+  <svg class="backdrop" aria-hidden="true" focusable="false">
+    <defs>
+      <pattern id="bd-tile" x="-48" y="-48" width="96" height="96" patternUnits="userSpaceOnUse"><rect x="5" y="5" width="86" height="86" rx="15"/></pattern>
+      <linearGradient id="bd-a" gradientUnits="userSpaceOnUse" x1="-800" y1="192" x2="576" y2="-192"><stop offset="0" class="b1"/><stop offset=".5" class="b2"/><stop offset="1" class="b3"/></linearGradient>
+      <linearGradient id="bd-b" gradientUnits="userSpaceOnUse" x1="576" y1="620" x2="330" y2="96"><stop offset="0" class="b4"/><stop offset="1" class="b5"/></linearGradient>
+      <radialGradient id="bd-g"><stop offset="0" class="g1"/><stop offset="1" class="g2"/></radialGradient>
+    </defs>
+    <svg x="50%" y="50%" overflow="visible">
+      <rect class="bd-tiles" x="-2400" y="-1500" width="4800" height="3000" fill="url(#bd-tile)"/>
+      <g class="bd-scene">
+      <g class="bd-ray" stroke="url(#bd-a)">
+        <path class="halo" pathLength="1" d="M-1400 192H-480V-192H576"/>
+        <path class="glow" pathLength="1" d="M-1400 192H-480V-192H576"/>
+        <path class="core" pathLength="1" d="M-1400 192H-480V-192H576"/>
+        <path class="hot" pathLength="1" d="M-1400 192H-480V-192H576"/>
+      </g>
+      <g class="bd-ray b" stroke="url(#bd-b)">
+        <path class="halo" pathLength="1" d="M576 1100V96H0"/>
+        <path class="glow" pathLength="1" d="M576 1100V96H0"/>
+        <path class="core" pathLength="1" d="M576 1100V96H0"/>
+        <path class="hot" pathLength="1" d="M576 1100V96H0"/>
+      </g>
+      <g class="bd-ring"><circle cx="-480" cy="192" r="31"/><circle cx="-480" cy="-192" r="31"/><circle cx="576" cy="96" r="31"/><circle cx="-576" cy="-96" r="31"/><circle cx="480" cy="-96" r="31"/></g>
+      <g class="bd-mirror"><path d="M-498 210l36-36"/><path d="M-498-174l36-36"/><path d="M558 78l36 36"/></g>
+      <g class="bd-mirror idle"><path d="M-594-114l36 36"/><path d="M462-78l36-36"/></g>
+      <path class="bd-gem idle" d="M-576-30l24 30-24 30-24-30z"/>
+      <circle class="bd-gem-glow" cx="576" cy="-192" r="84" fill="url(#bd-g)"/>
+      <path class="bd-gem" d="M576-222l24 30-24 30-24-30z"/>
+      <path class="bd-gem lit" d="M576-222l24 30-24 30-24-30z"/>
+      </g>
+    </svg>
+  </svg>
+  <p class="desk-note" aria-hidden="true">Turn the mirrors.<br>Light the crystals.</p>
+  <main class="window" id="window">
+    <header class="titlebar">
+      <a class="home-link" href="../" title="All games" aria-label="All games" style="display:flex;flex:none;border-radius:8px"><img class="mark" src="./favicon.svg" alt="" width="30" height="30"></a>
+      <div class="title">
+        <h1><svg class="wordmark" viewBox="63 -741 4286 753" role="img" aria-label="Beamfold"><defs><linearGradient id="wm" x1="0" y1="0" x2="1" y2="0"><stop offset="0" class="b1"/><stop offset=".5" class="b2"/><stop offset="1" class="b3"/></linearGradient></defs><path fill="url(#wm)" d="M205 0V-133H353Q395 -133 420 -156Q444 -180 444 -218Q444 -243 433 -262Q422 -282 402 -292Q381 -303 353 -303H205V-432H342Q377 -432 400 -450Q422 -467 422 -504Q422 -541 400 -558Q377 -576 342 -576H205V-709H385Q451 -709 500 -684Q548 -659 574 -617Q600 -575 600 -522Q600 -451 552 -404Q503 -358 411 -347V-407Q513 -395 567 -342Q621 -288 621 -207Q621 -147 591 -100Q561 -54 506 -27Q452 0 378 0ZM63 0V-709H239V0ZM923 11Q841 11 778 -22Q715 -54 679 -112Q643 -170 643 -245Q643 -319 678 -376Q713 -434 774 -468Q834 -501 910 -501Q984 -501 1042 -470Q1099 -438 1132 -382Q1164 -327 1164 -256Q1164 -241 1162 -226Q1161 -210 1156 -190L725 -188V-300L1087 -303L1009 -254Q1008 -295 997 -322Q986 -348 965 -362Q944 -376 912 -376Q879 -376 855 -360Q831 -344 818 -315Q805 -286 805 -245Q805 -203 819 -174Q833 -144 859 -129Q885 -114 923 -114Q959 -114 986 -126Q1014 -138 1036 -163L1127 -72Q1091 -31 1040 -10Q988 11 923 11ZM1409 10Q1341 10 1288 -23Q1235 -56 1205 -114Q1175 -171 1175 -244Q1175 -318 1205 -376Q1235 -434 1288 -466Q1341 -499 1409 -499Q1455 -499 1493 -482Q1531 -466 1556 -436Q1580 -406 1585 -368V-122Q1580 -83 1556 -54Q1531 -24 1493 -7Q1455 10 1409 10ZM1446 -145Q1489 -145 1516 -173Q1542 -201 1542 -245Q1542 -274 1530 -296Q1518 -318 1496 -331Q1475 -344 1447 -344Q1419 -344 1398 -331Q1376 -318 1364 -296Q1351 -273 1351 -245Q1351 -216 1363 -194Q1375 -171 1397 -158Q1419 -145 1446 -145ZM1535 0V-131L1560 -251L1535 -369V-489H1706V0ZM1783 0V-489H1957V0ZM2090 0V-283Q2090 -314 2071 -332Q2052 -349 2024 -349Q2004 -349 1989 -341Q1974 -333 1966 -318Q1957 -304 1957 -283L1889 -310Q1889 -369 1915 -411Q1941 -453 1985 -476Q2029 -499 2085 -499Q2135 -499 2176 -476Q2216 -452 2240 -410Q2264 -368 2264 -311V0ZM2397 0V-283Q2397 -314 2378 -332Q2359 -349 2331 -349Q2312 -349 2296 -341Q2281 -333 2272 -318Q2264 -304 2264 -283L2162 -288Q2164 -354 2191 -401Q2218 -448 2266 -474Q2313 -499 2373 -499Q2430 -499 2475 -475Q2520 -451 2546 -406Q2571 -360 2571 -297V0ZM2691 0V-520Q2691 -582 2718 -632Q2745 -681 2796 -711Q2846 -741 2917 -741Q2970 -741 3010 -724Q3050 -706 3079 -677L2970 -568Q2962 -577 2950 -582Q2939 -586 2924 -586Q2897 -586 2881 -570Q2865 -554 2865 -527V0ZM2587 -344V-489H3003V-344ZM3280 11Q3201 11 3140 -22Q3078 -56 3042 -114Q3006 -173 3006 -246Q3006 -319 3042 -376Q3077 -434 3139 -468Q3201 -501 3279 -501Q3357 -501 3418 -468Q3480 -434 3516 -376Q3552 -319 3552 -246Q3552 -173 3516 -114Q3481 -56 3420 -22Q3358 11 3280 11ZM3279 -144Q3308 -144 3330 -156Q3351 -169 3363 -192Q3375 -215 3375 -245Q3375 -275 3362 -298Q3350 -320 3329 -332Q3308 -345 3279 -345Q3251 -345 3229 -332Q3207 -319 3195 -296Q3183 -274 3183 -244Q3183 -215 3195 -192Q3207 -169 3229 -156Q3251 -144 3279 -144ZM3596 0V-729H3770V0ZM4057 10Q3986 10 3932 -23Q3878 -56 3848 -114Q3817 -171 3817 -244Q3817 -318 3848 -376Q3878 -434 3932 -466Q3985 -499 4057 -499Q4103 -499 4143 -482Q4183 -466 4210 -436Q4237 -406 4242 -368V-129Q4237 -91 4210 -59Q4183 -27 4143 -8Q4103 10 4057 10ZM4088 -145Q4117 -145 4138 -158Q4159 -170 4172 -192Q4184 -215 4184 -245Q4184 -274 4172 -296Q4160 -318 4138 -331Q4117 -344 4089 -344Q4061 -344 4040 -331Q4018 -318 4006 -296Q3993 -273 3993 -245Q3993 -216 4005 -194Q4017 -171 4039 -158Q4061 -145 4088 -145ZM4348 0H4177V-131L4202 -251L4174 -369V-729H4348Z"/></svg></h1>
+        <p id="subtitle">Daily puzzle</p>
+      </div>
+      <nav class="toolbar" aria-label="Game menu">
+        <button class="tb" data-act="intro" title="How to play" aria-label="How to play">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.4 9.3a2.7 2.7 0 1 1 3.9 2.5c-.8.5-1.3 1-1.3 2"/><circle cx="12" cy="16.9" r=".6" fill="currentColor"/></svg>
+        </button>
+        <button class="tb" data-act="stats" title="Statistics" aria-label="Statistics">
+          <svg viewBox="0 0 24 24"><path d="M5 20V11M12 20V4M19 20v-6"/></svg>
+        </button>
+        <button class="tb" data-act="sound" id="tb-sound" title="Sound" aria-label="Sound" aria-pressed="true"></button>
+        <button class="tb" data-act="theme" id="tb-theme" title="Switch appearance" aria-label="Switch between light and dark"></button>
+      </nav>
+      <div class="seg" id="seg" role="tablist" aria-label="Puzzle">
+        <i class="seg-thumb" aria-hidden="true"></i>
+        <button role="tab" data-act="mode" data-mode="easy" aria-selected="false">Easy</button>
+        <button role="tab" data-act="mode" data-mode="hard" aria-selected="false">Hard</button>
+      </div>
+    </header>
+
+    <section class="gauges" aria-label="Progress">
+      <div class="gauge">
+        <span class="label">Time</span>
+        <span class="value" id="g-time">0:00</span>
+      </div>
+      <div class="gauge">
+        <span class="label">Moves</span>
+        <span class="value"><span id="g-moves">0</span><small id="g-par"></small></span>
+      </div>
+      <div class="gauge">
+        <span class="label">Crystals</span>
+        <span class="pips" id="g-pips" role="img"></span>
+      </div>
+    </section>
+
+    <section class="stage" id="stage">
+      <canvas id="board" aria-label="Puzzle board"></canvas>
+      <div class="cover" id="cover"></div>
+    </section>
+
+    <footer class="actions" id="actions"></footer>
+  </main>
+</div>
+
+<div class="scrim" id="scrim" hidden>
+  <div class="sheet" id="sheet" role="dialog" aria-modal="true" tabindex="-1"></div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<p class="sr" id="status" role="status" aria-live="polite"></p>
+</body>
+</html>

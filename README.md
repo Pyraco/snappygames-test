@@ -1,3 +1,3 @@
-# snappygames home page (test)
+# snappygames (test)
 
-Built files only. A test copy of the home page; not for listing.
+Built files only: the home page, and each game on a page of its own (beamfold, shiftlight, threadlight, beamfold-ultra). A test copy; not for listing.
